@@ -8,6 +8,7 @@ import ExamViews from './components/ExamViews'
 import ExamViewModelParent from './components/ExamViewModelParent'
 import GetAllExams from './components/GetAllExams'
 import ProtectedRoute from './security/ProtectedRoute'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
@@ -16,17 +17,20 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/staff" element={
           <ProtectedRoute allowedRole="staff">
+            <Navbar/>
             <StaffPanel />
           </ProtectedRoute>
         } />
         <Route path="/staff/generate-exam" element={
           <ProtectedRoute allowedRole="staff">
+            <Navbar/>
             <ExamGenerator />
           </ProtectedRoute>
         } />
 
         <Route path="/staff/view-exams" element={
           <ProtectedRoute allowedRole="staff">
+            <Navbar/>
             <ExamViews />
           </ProtectedRoute>
         }>
@@ -35,6 +39,7 @@ function App() {
         </Route>
         <Route path="/student" element={
           <ProtectedRoute allowedRole="student">
+            <Navbar/>
             <StudentPanel />
           </ProtectedRoute>
         } />

@@ -8,6 +8,7 @@ function ExamModelAnswer({ examId }) {
             fetch(`http://localhost:5183/api/Exam/Get-Exam-Anwer-Model/${examId}`)
                 .then(res => res.json())
                 .then(data => {
+                    console.log("Full API Response:", data);
                     if (data.isSuccess) setAnswers(data.value);
                     else setAnswers(null);
                 })
