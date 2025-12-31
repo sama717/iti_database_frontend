@@ -1,37 +1,38 @@
 import { useState, useEffect } from 'react';
+import { api } from '../api/api';
+import "../style/staffpanel.css"
 
-function ExamViewer({ passedId }) { 
+function ExamViewer({ passedId }) {
     const [examData, setExamData] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchExam = async () => {
-            if (!passedId) return; 
+            if (!passedId) return;
 
             setLoading(true);
             try {
-                const response = await fetch(`http://localhost:5183/api/Exam/Get-Exam/${passedId}`);
-                const data = await response.json();
-
-                if (data.isSuccess) {
-                    setExamData(data.value);
+                const response = await api.get(`/api/Exam/Get-Exam/${passedId}`);
+                if (response.data.isSuccess) {
+                    setExamData(response.data.value);
                 } else {
                     setExamData(null);
                 }
             } catch (error) {
                 console.error("Fetch error:", error);
+                setExamData(null);
             } finally {
                 setLoading(false);
             }
         };
 
         fetchExam();
-    }, [passedId]); 
+    }, [passedId]);
 
     return (
         <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
             <h2>Questions View</h2>
-            
+
             {loading && <p>Loading questions...</p>}
 
             {!passedId && <p>Please enter an ID above to see questions.</p>}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { api } from '../api/api';
 
 function GetAllExams() {
     const [exams, setExams] = useState([]);
@@ -6,8 +7,8 @@ function GetAllExams() {
     const displayAllExams = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5183/api/Exam/Get-All-Exams');
-            const data = await response.json();
+            const response = await api.get('api/Exam/Get-All-Exams');
+            const data = response.data; 
             
             if (data.isSuccess) {
                 setExams(data.value); 

@@ -1,0 +1,159 @@
+/* Global Reset */
+* {
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+.layout-page-wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 2. The Main Layout Container */
+.layout-container {
+    display: flex;         
+    height: 92vh;         /* Leaves a gap at top/bottom */
+    width: 95%;           /* Leaves a gap at sides */
+    margin: 0 auto;
+    gap: 25px;            /* Horizontal space between Sidebar and Main */
+}
+
+/* 3. Sidebar Column (Left) */
+.sidebar {
+    width: 280px;         
+    flex-shrink: 0;       
+    height: 100%;
+}
+
+/* Container inside Sidebar to create the 2 vertical boxes */
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 25px;          
+}
+
+/* BOX 1: Navigation (Grey) */
+.navbar-wrapper {
+    flex: 1;              /* Fills top space */
+    background-color: #ffffff; 
+    border-radius: 15px; 
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* BOX 2: Logout Section (Red) */
+.navbar-footer {
+    background-color: #A0031B; 
+    border-radius: 15px;
+    padding: 20px;
+    height: 130px;       
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 4. Main Content Column (Right) */
+.main-content {
+    flex: 1;            
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;       
+}
+
+/* BOX 3: Welcome Bar (Red) */
+.welcome-bar {
+    background-color: #A0031B; 
+    height: 90px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* BOX 4: Content Card (Grey) */
+.content-card {
+    flex: 1;
+    background-color: #ffffff;
+    border-radius: 25px; 
+    padding: 40px;
+    overflow-y: auto;     /* Ensures only this box scrolls */
+}
+
+/* --- Nav Link Styling --- */
+.logo-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-container img {
+    height: 70px;
+    width: auto;
+}
+
+.nav-list {
+    list-style: none;
+}
+
+.nav-item {
+    margin-bottom: 12px;
+}
+
+.nav-link {
+    color: #666;             /* Grey text for inactive links */
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 12px 20px;
+    display: flex;          
+    align-items: center;
+    gap: 15px;               
+    border-radius: 12px;    
+    background-color: transparent; 
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+    background-color: #f0f2f5;
+    color: #333;
+    transform: translateX(4px); 
+}
+
+.active-link {
+    background-color: rgb(42, 42, 42) !important;
+    color: #ffffff !important;
+}
+
+.nav-icon {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-container {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee; /* Separator line */
+    margin-bottom: 20px;
+}
+
+/* Logout Button */
+.logout-btn {
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+}

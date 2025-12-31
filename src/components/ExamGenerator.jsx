@@ -1,81 +1,77 @@
 import { useState } from 'react';
+import { api } from '../api/api';
 
 function ExamGenerator() {
     const [crsId, setCrsId] = useState("");
     const [mcq, setMcq] = useState("");
     const [tf, setTf] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleGenerate = async (e) => {
-        if (e) e.preventDefault();
+    if (e) e.preventDefault();
+    setLoading(true);
 
-        if (!crsId || (Number(mcq) + Number(tf) === 0)) {
-            alert("Error: Please provide a Course ID and at least one question (MCQ or TF).");
-            return;
-        }
-
-        const bodyToSend = {
-            crs_id: Number(crsId),
-            mcqNumber: Number(mcq),
-            tfNumber: Number(tf)
-        };
-
-        try {
-            const response = await fetch('http://localhost:5183/api/Exam/Generate-Exam', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(bodyToSend)
-            });
-            const data = await response.json();
-            alert(data.isSuccess ? "Success: Exam added to DB" : "Failed to generate");
-        }
-        catch (error) {
-            console.error(error);
-        }
+    // Try PascalCase to satisfy the C# backend DTO
+    const bodyToSend = {
+        Crs_id: Number(crsId),
+        McqNumber: Number(mcq),
+        TfNumber: Number(tf)
     };
 
+    try {
+        const response = await api.post('/api/Exam/Generate-Exam', bodyToSend);
+        if (response.data.isSuccess) {
+            alert("🎉 Exam Generated Successfully!");
+            setCrsId(""); setMcq(""); setTf("");
+        } else {
+            alert("Generation Failed: " + response.data.message);
+        }
+    } catch (error) {
+        console.error("SERVER ERROR:", error.response?.data || error.message);
+        alert("The server is still missing the Course ID parameter. Your developer needs to check the mapping in examProcRepository.cs.");
+    } finally {
+        setLoading(false);
+    }
+};
+
     return (
-        <div>
-            <form onSubmit={handleGenerate}>
-                <h2>Staff Panel: Create Exam</h2>
-                
-                <label>Course ID: </label>
+        <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
+            <h2 style={{ color: '#8b0000', borderBottom: '2px solid #8b0000' }}>Generate Exam</h2>
+            <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
                 <input 
                     type="number" 
-                    min="1"
+                    placeholder="Course ID" 
                     value={crsId} 
-                    onChange={e => {
-                        const val = e.target.value;
-                        if (val === "" || Number(val) > 0) setCrsId(val);
-                    }}
+                    onChange={e => setCrsId(e.target.value)} 
+                    style={inputStyle} 
+                    required 
                 />
-
-                <label>MCQ Count: </label>
                 <input 
                     type="number" 
-                    min="0"
+                    placeholder="MCQ Number" 
                     value={mcq} 
-                    onChange={e => {
-                        const val = e.target.value;
-                        if (val === "" || Number(val) >= 0) setMcq(val);
-                    }}
+                    onChange={e => setMcq(e.target.value)} 
+                    style={inputStyle} 
                 />
-
-                <label>TF Count: </label>
                 <input 
                     type="number" 
-                    min="0"
+                    placeholder="T/F Number" 
                     value={tf} 
-                    onChange={e => {
-                        const val = e.target.value;
-                        if (val === "" || Number(val) >= 0) setTf(val);
-                    }}
+                    onChange={e => setTf(e.target.value)} 
+                    style={inputStyle} 
                 />
-                <button type="submit">Generate Exam</button>
+                <button 
+                    type="submit" 
+                    disabled={loading}
+                    style={{ backgroundColor: '#8b0000', color: 'white', padding: '10px', cursor: 'pointer', border: 'none', borderRadius: '4px' }}
+                >
+                    {loading ? "Processing..." : "Execute Generation"}
+                </button>
             </form>
         </div>
     );
 }
+
+const inputStyle = { padding: '10px', borderRadius: '4px', border: '1px solid #ccc' };
 
 export default ExamGenerator;

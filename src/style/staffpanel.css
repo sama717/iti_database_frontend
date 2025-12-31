@@ -1,0 +1,88 @@
+.staff-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+    flex-direction: row;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.box {
+    position: relative; /* Necessary for the background SVG positioning */
+    width: calc((940.25px / 3) - 25px); 
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Professional left-alignment */
+    justify-content: flex-end; /* Text at the bottom looks more modern */
+    padding: 25px;
+    border-radius: 20px;
+    overflow: hidden; /* Clips the background SVG */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea78;
+}
+
+/* Hover Effect: Lifts the card and deepens the shadow */
+.box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Background Icon Styling */
+.box-svg-bg {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 140px;
+    height: 140px;
+    opacity: 0.15; 
+    color: white;
+    transform: rotate(-15deg); 
+}
+
+/* Specific Card Colors using Gradients */
+/* .box-1 {
+    background: linear-gradient(135deg, #3490c5 0%, #2171a0 100%);
+}
+
+.box-2 {
+    background: linear-gradient(135deg, #EA9010 0%, #F2A840 100%);
+} */
+
+.box-reports {
+    background: linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 100%);
+}
+
+/* Text Styling */
+.box h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    z-index: 1;
+    color: rgb(255, 255, 255);
+}
+
+.box p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin: 5px 0 0 0;
+    z-index: 1;
+}
+
+.staff-container a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.box-1{
+    background-color: #0072BB;
+} 
+
+.box-2{
+    background-color: #EA9010;
+}
+
+.box-3{
+    background-color: #109356;
+}
