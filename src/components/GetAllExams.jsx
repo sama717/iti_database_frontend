@@ -1,41 +1,69 @@
 import { useState } from "react";
 import { api } from '../api/api';
+import "../style/examlist.css";
 
 function GetAllExams() {
     const [exams, setExams] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const displayAllExams = async (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
+        setLoading(true);
         try {
-            const response = await api.get('api/Exam/Get-All-Exams');
-            const data = response.data; 
+            // Added leading slash to match your other working calls
+            const response = await api.get('/api/Exam/Get-All-Exams');
             
-            if (data.isSuccess) {
-                setExams(data.value); 
+            if (response.data.isSuccess) {
+                setExams(response.data.value); 
             }
         } catch (error) {
             console.error("Error fetching exams:", error);
+        } finally {
+            setLoading(false);
         }
     }
 
     return (
-        <div>
-            <form onSubmit={displayAllExams}>
-                <button type="submit">Display All Exams</button>
-            </form>
+        <div className="exam-list-page">
+            <div className="control-header">
+                <button 
+                    type="button" 
+                    onClick={displayAllExams} 
+                    className="fetch-btn" 
+                    disabled={loading}
+                >
+                    {loading ? "Loading..." : "Refresh Exam List"}
+                </button>
+            </div>
 
-            <div style={{ marginTop: '20px' }}>
-                {exams.length > 0 ? (
-                    exams.map((exam) => (
-                        <div key={exam.examId} style={{ borderBottom: '1px solid #ddd', padding: '10px' }}>
-                            <p><strong>Exam ID:</strong> {exam.examId}</p>
-                            <p><strong>Course ID:</strong> {exam.courseId}</p>
-                            <p><strong>Duration:</strong> {exam.examDuration} mins</p>
-                            <p><strong>Date:</strong> {new Date(exam.examDate).toLocaleDateString()}</p>
-                        </div>
-                    ))
+            <div className="table-container">
+                {exams && exams.length > 0 ? (
+                    <table className="exams-table">
+                        <thead>
+                            <tr>
+                                <th>Exam ID</th>
+                                <th>Course ID</th>
+                                <th>Duration</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {exams.map((exam) => (
+                                <tr key={exam.examId}>
+                                    <td>
+                                        <span className="exam-id-badge">#{exam.examId}</span>
+                                    </td>
+                                    <td>{exam.courseId}</td>
+                                    <td>{exam.examDuration} Minutes</td>
+                                    <td>{new Date(exam.examDate).toLocaleDateString()}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 ) : (
-                    <p>No exams to display. Click the button above.</p>
+                    <div className="empty-state">
+                        <p>No exams loaded. Click the button above to fetch all exams.</p>
+                    </div>
                 )}
             </div>
         </div>

@@ -11,6 +11,7 @@ function AddStudent() {
         lName: '',
         phoneNumber: ''
     });
+    const [status, setStatus] = useState(null);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,56 +19,72 @@ function AddStudent() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setStatus(null);
         try {
             const response = await api.post('/api/Authentication/Add-Student', formData);
-            
             if (response.data.isSuccess) {
-                alert("Student added successfully!");
+                setStatus({ type: 'success', msg: "Student registered successfully!" });
                 setFormData({ email: '', password: '', userName: '', fName: '', lName: '', phoneNumber: '' });
             }
         } catch (error) {
-            console.error("Add Student Error:", error.response?.data || error.message);
-            alert("Failed to add student. Check console for details.");
+            setStatus({ type: 'error', msg: "Failed to add student. Please check credentials." });
         }
     };
 
     return (
-        <div className="add-student-container">
-            <h1>Add Student</h1>
-            <form onSubmit={handleSubmit} className="add-student-form">
-                <div className="form-group">
+        <div className="ads-container">
+            <h1 className="ads-title">Register New Student</h1>
+            
+            <form onSubmit={handleSubmit} className="ads-form">
+                <div className="ads-form-group">
                     <label>First Name</label>
-                    <input name="fName" value={formData.fName} onChange={handleChange} required />
+                    <input className="ads-input" name="fName" value={formData.fName} onChange={handleChange} placeholder="John" required />
                 </div>
                 
-                <div className="form-group">
+                <div className="ads-form-group">
                     <label>Last Name</label>
-                    <input name="lName" value={formData.lName} onChange={handleChange} required />
+                    <input className="ads-input" name="lName" value={formData.lName} onChange={handleChange} placeholder="Last Name" required />
                 </div>
 
-                <div className="form-group">
+                <div className="ads-form-group">
                     <label>Username</label>
-                    <input name="userName" value={formData.userName} onChange={handleChange} required />
+                    <input className="ads-input" name="userName" value={formData.userName} onChange={handleChange} placeholder="Username" required />
                 </div>
 
-                <div className="form-group">
-                    <label>Email</label>
-                    <input name="email" type="email" value={formData.email} onChange={handleChange} required />
-                </div>
-
-                <div className="form-group">
-                    <label>Password</label>
-                    <input name="password" type="password" value={formData.password} onChange={handleChange} required />
-                </div>
-
-                <div className="form-group">
+                <div className="ads-form-group">
                     <label>Phone Number</label>
-                    <input name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
+                    <input className="ads-input" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Phone Number" required />
+                </div>
+
+                <div className="ads-form-group">
+                    <label>Email Address</label>
+                    <input className="ads-input" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Email Address" required />
+                </div>
+
+                <div className="ads-form-group">
+                    <label>Password</label>
+                    <input className="ads-input" name="password" type="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
                 </div>
                 
-                <button type="submit" className="submit-btn">
-                    Register Student
-                </button>
+                <div className="ads-full-width">
+                    <button type="submit" className="ads-submit-btn">
+                        Create Student Account
+                    </button>
+                    
+                    {status && (
+                        <div style={{ 
+                            marginTop: '20px', 
+                            padding: '15px', 
+                            borderRadius: '10px',
+                            textAlign: 'center',
+                            backgroundColor: status.type === 'success' ? '#e6ffed' : '#fff1f0',
+                            color: status.type === 'success' ? '#109356' : '#cf1322',
+                            border: `1px solid ${status.type === 'success' ? '#b7eb8f' : '#ffa39e'}`
+                        }}>
+                            {status.msg}
+                        </div>
+                    )}
+                </div>
             </form>
         </div>
     );

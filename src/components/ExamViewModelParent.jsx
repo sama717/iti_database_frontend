@@ -1,38 +1,40 @@
 import { useState } from 'react';
 import ExamViewer from './ExamViewer';
 import ExamModelAnswer from './ExamModelAnswer';
+import "../style/examviewstaff.css";
 
 function ExamComparisonView() {
-    const [inputId, setInputId] = useState(""); 
-    const [activeId, setActiveId] = useState(null); 
+    const [inputId, setInputId] = useState("");
+    const [activeId, setActiveId] = useState(null);
 
     const handleSearch = (e) => {
         e.preventDefault();
-        setActiveId(inputId); 
+        if (inputId) setActiveId(inputId);
     };
 
     return (
-        <div>
-            <form onSubmit={handleSearch} style={{ marginBottom: '30px', textAlign: 'center' }}>
-                <input 
-                    type="number" 
-                    placeholder="Enter Exam ID" 
-                    value={inputId} 
-                    onChange={(e) => setInputId(e.target.value)} 
-                />
-                <button type="submit">View</button>
+        <div className="exam-comp-page">
+            <form onSubmit={handleSearch} className="search-container">
+                <div className="search-group">
+                    <label className="search-label">Search Exam ID:</label>
+                    <input
+                        className="search-input"
+                        type="number"
+                        placeholder="Enter exam ID"
+                        value={inputId}
+                        onChange={(e) => setInputId(e.target.value)}
+                    />
+                </div>
+                <button type="submit" className="search-button">View Exam</button>
             </form>
 
-            <div style={{ display: 'flex', gap: '20px' }}>
-            
-                <div style={{ flex: 2 }}>
+            <div className="comparison-grid">
+                <div className="questions-column">
                     <ExamViewer passedId={activeId} />
                 </div>
-
-                <div style={{ flex: 1 }}>
+                <div className="answers-column">
                     <ExamModelAnswer examId={activeId} />
                 </div>
-
             </div>
         </div>
     );

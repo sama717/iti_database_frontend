@@ -1,52 +1,54 @@
 import { useState, useEffect } from 'react';
 import { api } from '../api/api';
-import "../style/staffpanel.css"
 
 function ExamViewer({ passedId }) {
     const [examData, setExamData] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchExam = async () => {
             if (!passedId) return;
-
             setLoading(true);
+            setError(null);
+            setExamData(null);
+
             try {
                 const response = await api.get(`/api/Exam/Get-Exam/${passedId}`);
-                if (response.data.isSuccess) {
+                if (response.data.isSuccess && response.data.value?.length > 0) {
                     setExamData(response.data.value);
                 } else {
-                    setExamData(null);
+                    setError(`Error: Exam with ID ${passedId} not found.`);
                 }
-            } catch (error) {
-                console.error("Fetch error:", error);
-                setExamData(null);
+            } catch (err) {
+                setError("Failed to fetch exam questions. Please try again.");
             } finally {
                 setLoading(false);
             }
         };
-
         fetchExam();
     }, [passedId]);
 
     return (
-        <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
-            <h2>Questions View</h2>
+        <div className="exam-card">
+            <h2 className="section-title exam-title">Exam Questions</h2>
 
-            {loading && <p>Loading questions...</p>}
-
-            {!passedId && <p>Please enter an ID above to see questions.</p>}
+            {loading && <div className="status-msg">Loading exam data...</div>}
+            {error && <div className="error-box">{error}</div>}
+            {!passedId && !loading && <div className="status-msg">Enter an ID to view the question paper.</div>}
 
             {examData && (
-                <div style={{ marginTop: '20px' }}>
+                <div className="questions-list">
                     {examData.map((q, index) => (
-                        <div key={q.q_id} style={{ marginBottom: '20px', padding: '10px', borderBottom: '1px solid #eee' }}>
-                            <p><strong>Q{index + 1}: {q.q_text}</strong></p>
-                            <div style={{ paddingLeft: '20px', fontSize: '0.9em' }}>
-                                {q.choice1 && <p>1) {q.choice1}</p>}
-                                {q.choice2 && <p>2) {q.choice2}</p>}
-                                {q.choice3 && <p>3) {q.choice3}</p>}
-                                {q.choice4 && <p>4) {q.choice4}</p>}
+                        <div key={q.q_id || index} className="question-item">
+                            <span className="question-text">
+                                <strong>Q{index + 1}:</strong> {q.q_text}
+                            </span>
+                            <div className="choices-grid">
+                                {q.choice1 && <div className="choice-box">1. {q.choice1}</div>}
+                                {q.choice2 && <div className="choice-box">2. {q.choice2}</div>}
+                                {q.choice3 && <div className="choice-box">3. {q.choice3}</div>}
+                                {q.choice4 && <div className="choice-box">4. {q.choice4}</div>}
                             </div>
                         </div>
                     ))}

@@ -1,0 +1,102 @@
+/* Unique prefix vsg- (View Student Grades) */
+.vsg-container {
+    width: 100%;
+    animation: vsgFadeIn 0.3s ease-in-out;
+}
+
+.vsg-title {
+    font-size: 1.6rem;
+    color: #333;
+    margin-bottom: 25px;
+    padding-left: 15px;
+    border-left: 5px solid #A0031B; /* ITI Red accent */
+    font-weight: 700;
+}
+
+/* Search Bar */
+.vsg-search-form {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.vsg-input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.vsg-input:focus {
+    outline: none;
+    border-color: #A0031B;
+}
+
+.vsg-search-btn {
+    background-color: rgb(42, 42, 42); /* Your Dark Grey */
+    color: white;
+    padding: 0 25px;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.vsg-search-btn:hover:not(:disabled) {
+    background-color: #000;
+    transform: translateY(-2px);
+}
+
+/* Table Design */
+.vsg-table-wrapper {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.vsg-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.vsg-table th {
+    background-color: #fcfcfc;
+    padding: 18px 15px;
+    color: #333;
+    font-weight: 700;
+    border-bottom: 2px solid #eee;
+}
+
+.vsg-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+/* Grade Badges */
+.vsg-badge {
+    padding: 5px 14px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.vsg-empty {
+    padding: 60px;
+    text-align: center;
+    color: #999;
+}
+
+@keyframes vsgFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

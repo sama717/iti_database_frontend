@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FilePlus, BookOpenCheck, UsersRound} from 'lucide-react';
+import '../style/staffPanel.css'
 
 function StaffPanel(){
     return(

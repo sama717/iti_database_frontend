@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import LogoutButton from '../security/Logout';
-import { LayoutDashboard } from 'lucide-react';
+import { LayoutDashboard, FilePlus, SquareKanban, UserRoundPen, School} from 'lucide-react';
 
 function Navbar() {
     const userRole = localStorage.getItem("userRole");
@@ -24,17 +24,17 @@ function Navbar() {
                                 </li>
                                 <li className="nav-item">
                                     <Link to="/staff/generate-exam" className={location.pathname === '/staff/generate-exam' ? 'nav-link active-link' : 'nav-link'}>
-                                        <span className="nav-icon">📝</span> Generate Exam
+                                        <span className="nav-icon"><FilePlus /></span> Generate Exam
                                     </Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to="/staff/view-exams" className={location.pathname.startsWith('/staff/view-exams') ? 'nav-link active-link' : 'nav-link'}>
-                                        <span className="nav-icon">⚙️</span> Manage Exams
+                                        <span className="nav-icon"><SquareKanban /></span> Manage Exams
                                     </Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to="/staff/manage-students" className={location.pathname.startsWith('/staff/manage-students') ? 'nav-link active-link' : 'nav-link'}>
-                                        <span className="nav-icon">⚙️</span> Manage Students
+                                        <span className="nav-icon"><UserRoundPen /></span> Manage Students
                                     </Link>
                                 </li>
                             </>
@@ -45,7 +45,7 @@ function Navbar() {
                             <>
                                 <li className="nav-item">
                                     <Link to="/student" className={location.pathname === '/student' ? 'nav-link active-link' : 'nav-link'}>
-                                        <span className="nav-icon">🎓</span> My Dashboard
+                                        <span className="nav-icon"><School /></span> Exam Portal
                                     </Link>
                                 </li>
                                

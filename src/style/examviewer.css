@@ -1,0 +1,197 @@
+/* Container and General Font */
+.ev-container {
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: evFadeIn 0.3s ease-in-out;
+}
+
+/* MODAL OVERLAY - The Pop-up Background */
+.ev-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+}
+
+/* THE MODAL BOX */
+.ev-modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    animation: evPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ev-modal-content h3 {
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.ev-modal-content p {
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Modal Button Styling */
+.ev-modal-btn {
+    padding: 12px 35px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Pop-up Variants */
+.ev-error-modal { border-top: 10px solid #A0031B; }
+.ev-error-btn { background: #A0031B; color: white; }
+
+.ev-success-modal { border-top: 10px solid #338450; }
+.ev-success-btn { background: #338450; color: white; }
+
+/* AUTH/ENTRY CARD */
+.ev-auth-card {
+    background: #ffffff;
+    padding: 50px 40px;
+    border-radius: 28px;
+    border: 2px dashed #d1d1d1;
+    max-width: 550px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+.ev-input-group {
+    display: flex;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.ev-field {
+    flex: 1;
+    text-align: left;
+}
+
+.ev-field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.ev-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    font-size: 1rem;
+}
+
+/* ACTIVE EXAM UI */
+.ev-exam-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #eee;
+}
+
+.ev-info-badge {
+    background: #f1f3f5;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    color: #333;
+}
+
+.ev-question-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    border: 1px solid #efefef;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.ev-q-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: block;
+    color: #1a1a1a;
+}
+
+.ev-choice-label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    border: 1px solid #f0f0f0;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.ev-choice-label:hover {
+    background: #fcfcfc;
+}
+
+.ev-choice-label.selected {
+    background: rgba(51, 132, 80, 0.08);
+    border-color: #338450;
+}
+
+/* BUTTONS */
+.ev-start-btn {
+    background: #338450;
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.ev-submit-btn {
+    background: #28673E;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 18px;
+    width: 100%;
+    font-size: 1rem;
+    margin: 40px 0;
+    cursor: pointer;
+}
+
+.ev-cancel-link {
+    background: none;
+    border: none;
+    color: #A0031B;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* ANIMATIONS */
+@keyframes evFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes evPop { 
+    from { transform: scale(0.85); opacity: 0; } 
+    to { transform: scale(1); opacity: 1; } 
+}

@@ -1,0 +1,165 @@
+/* ISOLATED SCOPE: Only affects elements inside the comparison page */
+.exam-comp-page {
+    width: 100%;
+}
+
+.exam-comp-page .search-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    background: #fdfdfd;
+    padding: 20px 30px;
+    border-radius: 15px;
+    border: 1px solid #eee;
+}
+
+/* Wrapper for Label + Input */
+.exam-comp-page .search-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1; 
+    width: 80%;
+}
+
+.exam-comp-page .search-label {
+    font-weight: 600;
+    color: #444;
+    white-space: nowrap; /* Prevents label from wrapping */
+}
+
+.exam-comp-page .search-input {
+    padding: 12px 18px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    width: 100%; /* Now takes up the rest of the search-group */
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.exam-comp-page .search-input:focus {
+    outline: none;
+    border-color: #A0031B;
+    box-shadow: 0 0 8px rgba(160, 3, 27, 0.1);
+}
+
+.exam-comp-page .search-button {
+    background-color: #338450;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.exam-comp-page .search-button:hover {
+    background-color: #28673E;
+    transform: translateY(-1px);
+}
+
+/* SIDE BY SIDE LAYOUT */
+.exam-comp-page .comparison-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.exam-comp-page .questions-column {
+    flex: 2; /* Takes 66% width */
+}
+
+.exam-comp-page .answers-column {
+    flex: 1; /* Takes 33% width */
+    position: sticky;
+    top: 20px;
+}
+
+/* CARDS */
+.exam-comp-page .exam-card {
+    background: #ffffff;
+    border-radius: 15px;
+    border: 1px solid #eaeaea;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.exam-comp-page .section-title {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    padding-left: 15px;
+}
+
+/* QUESTION STYLING */
+.exam-comp-page .question-item {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.exam-comp-page .question-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.exam-comp-page .choices-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.exam-comp-page .choice-box {
+    background: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #555;
+    border: 1px solid transparent;
+}
+
+/* ANSWERS STYLING */
+.exam-comp-page .answer-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.exam-comp-page .ans-label {
+    font-weight: bold;
+    color: #338450;
+}
+
+.exam-comp-page .error-box {
+    background-color: #fff5f5;
+    color: #A0031B;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ffcdd2;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.exam-comp-page .status-msg {
+    text-align: center;
+    color: #999;
+    padding: 50px 0;
+}
+
+.answer-title{
+    border-left: 5px solid #338450;
+}
+
+.exam-title{
+    border-left: 5px solid #A0031B;
+}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api } from '../api/api'; 
+import { api } from '../api/api';
 
 function ExamModelAnswer({ examId }) { 
     const [answers, setAnswers] = useState(null);
@@ -8,39 +8,39 @@ function ExamModelAnswer({ examId }) {
     useEffect(() => {
         const fetchAnswers = async () => {
             if (!examId) return;
+            setError(null);
+            setAnswers(null);
 
             try {
-                setError(null);
                 const response = await api.get(`/api/Exam/Get-Exam-Anwer-Model/${examId}`);
-                
-                if (response.data.isSuccess) {
+                if (response.data.isSuccess && response.data.value?.length > 0) {
                     setAnswers(response.data.value);
                 } else {
-                    setError("Exam ID not found in database.");
+                    setError("Answer model missing.");
                 }
             } catch (err) {
-                console.error("BACKEND CRASH DETAILS:", err.response?.data);
-                
-                setError(err.response?.status === 500 
-                    ? "Server Crash (500): Check your C# Backend logic." 
-                    : "Failed to load answers.");
+                setError("Failed to fetch answers.");
             }
         };
-
         fetchAnswers();
     }, [examId]);
 
     return (
-        <div className="content-card" style={{ backgroundColor: '#fff', border: '1px solid #ddd' }}>
-            <h2>Model Answer Key</h2>
-            {error && <p style={{ color: 'red', fontWeight: 'bold' }}>{error}</p>}
+        <div className="exam-card">
+            <h2 className="section-title answer-title">Model Answer</h2>
+            
+            {error && <div className="error-box">{error}</div>}
+            
             {answers ? (
-                answers.map((ans, index) => (
-                    <div key={index} style={{ padding: '8px 0', borderBottom: '1px solid #eee' }}>
-                        <p><strong>Q{index + 1}:</strong> {ans.answer}</p>
-                    </div>
-                ))
-            ) : (!error && <p>Waiting for Exam ID...</p>)}
+                <div className="answers-list">
+                    {answers.map((ans, index) => (
+                        <div key={index} className="answer-row">
+                            <span className="ans-label">Q{index + 1}</span>
+                            <span className="ans-text">{ans.answer}</span>
+                        </div>
+                    ))}
+                </div>
+            ) : (!error && <div className="status-msg">---</div>)}
         </div>
     );
 }

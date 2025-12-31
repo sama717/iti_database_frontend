@@ -1,0 +1,62 @@
+/* Container and Fade Animation */
+.sm-management-wrapper {
+    width: 100%;
+    animation: smFadeIn 0.3s ease-in-out;
+}
+
+/* Horizontal Nav Container */
+.sm-nav-container {
+    display: flex;
+    justify-content: flex-start; 
+    gap: 15px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Button Styling matching Exam Views */
+.sm-nav-btn {
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    background-color: #f1f3f5;
+    color: #495057;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Dark Grey Hover and Active States */
+.sm-nav-btn:hover,
+.sm-nav-btn.active {
+    background-color: rgb(42, 42, 42) !important; 
+    color: white !important;
+}
+
+.sm-nav-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Dashed Placeholder Card exactly like Exam View reference */
+.sm-placeholder-card {
+    background: white;
+    padding: 60px;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px dashed #e0e0e0; /* Dashed border from image */
+    color: #888;
+}
+
+.sm-placeholder-card p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+@keyframes smFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
